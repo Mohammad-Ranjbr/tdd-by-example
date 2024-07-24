@@ -15,4 +15,10 @@ public class MoneyTest {
         Assertions.assertEquals(15,proudct.amount);
     }
 
+    @Test
+    void testEquality() {
+        Assertions.assertEquals(new Dollar(5),new Dollar(5));
+        Assertions.assertNotEquals(new Dollar(5),new Dollar(8));
+    }
+
 }
