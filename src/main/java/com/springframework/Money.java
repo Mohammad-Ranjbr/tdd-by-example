@@ -20,11 +20,11 @@ public class Money {
     }
 
     public static Money dollar(int amount){
-        return new Dollar(amount,"USD");
+        return new Money(amount,"USD");
     }
 
     public static Money franc(int amount){
-        return new Franc(amount,"CHF");
+        return new Money(amount,"CHF");
     }
 
     // The Java equals method only checks the equality of the memory location of two objects
@@ -34,16 +34,16 @@ public class Money {
         return amount == money.amount && Objects.equals(this.currency, money.currency);
     }
 
+    public Money times(int multiplier){
+        return new Money(amount * multiplier,this.currency);
+    }
+
     @Override
     public String toString() {
         return "Money{" +
                 "amount=" + amount +
                 ", currency='" + currency + '\'' +
                 '}';
-    }
-
-    public Money times(int multiplier){
-        return new Money(amount * multiplier,this.currency);
     }
 
 }
