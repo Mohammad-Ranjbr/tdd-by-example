@@ -3,6 +3,7 @@ package guru.springframework;
 import com.springframework.Bank;
 import com.springframework.Expression;
 import com.springframework.Money;
+import com.springframework.Sum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +40,30 @@ public class MoneyTest {
         Bank bank = new Bank();
         Money reduced = bank.reduce(sum,"USD");
         Assertions.assertEquals(Money.dollar(10),reduced);
+    }
+
+    @Test
+    void testPlusReturnsSum() {
+        Money five = Money.dollar(5);
+        Expression result = five.plus(five);
+        Sum sum = (Sum) result;
+        Assertions.assertEquals(five,sum.augment);
+        Assertions.assertEquals(five,sum.addend);
+    }
+
+    @Test
+    void testReduceSum() {
+        Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum,"USD");
+        Assertions.assertEquals(Money.dollar(7),result);
+    }
+
+    @Test
+    void testReduceMoney() {
+        Bank bank = new Bank();
+        Money result = bank.reduce(Money.dollar(1),"USD");
+        Assertions.assertEquals(Money.dollar(1),result);
     }
 
 }
